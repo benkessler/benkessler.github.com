@@ -1,0 +1,48 @@
+body {
+	color: #000000;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 16px;
+}
+
+.body {
+padding-top: 20px;
+background-color: white;
+border-width: 0px;
+border-color: #000000;
+border-style: solid;
+margin-left: auto;
+margin-right: auto;
+width: 500px;
+text-align: center;
+}
+
+h1 {
+	margin-bottom: 7px;
+	margin-top: 5px;
+	font-size: 32px;
+	font-style: bold;
+	color: #333333;
+}
+
+#header {
+	text-align: center;
+}
+
+#footer {
+	text-align: center;
+}
+
+a {
+	color: #c24733;
+}
+
+.go {
+	color: #CC3300;
+}
+
+#content a {
+	text-decoration: none;
+	//font-size: 14px;
+	vertical-align: center;
+	text-align: center;
+}
