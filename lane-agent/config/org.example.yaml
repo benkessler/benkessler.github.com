@@ -1,0 +1,82 @@
+# Copy to config/org.yaml (git-ignored) and fill in.
+# One file per deployment. Your own Slack: org = your agency, clients = your clients.
+# A client's Slack: org = that company, clients = their brand(s).
+
+org:
+  name: Lane Growth
+  timezone: America/Los_Angeles
+  composioUserId: lane-growth        # whose connected apps the agent uses (connect with `npm run connect -- <toolkit>`)
+  voice: >
+    Direct, plain-spoken, numbers first. Short sentences. No hype, no jargon.
+
+owner:
+  name: Ben
+  slackUserId: U00000000             # your Slack member ID: approvals and DMs go here
+  email: you@example.com
+
+agent:
+  name: Lane
+  autoApprove: [GMAIL_CREATE_EMAIL_DRAFT]
+  treatAsRead: []                    # add slugs the guard wrongly treats as writes
+  allowWorkbench: false
+  emailAllowlist: [you@example.com]
+  # mailboxComposioUserId: lane-agent-mailbox   # a Gmail connected for the agent's own address
+
+clients:
+  - slug: acme
+    name: Acme Co
+    slackChannel: "#acme"
+    domains: [acme.com]
+    accounts:
+      googleAds: "123-456-7890"
+      metaAds: "act_000000000"
+      hubspotPortal: "00000000"
+      todoistProject: "Acme"
+    goals:
+      monthlyBudget: 30000
+      leadsPerMonth: 150
+      callsPerMonth: 120
+    paused: [meta]
+  - slug: globex
+    name: Globex
+    slackChannel: "#globex"
+    domains: [globex.com]
+    accounts:
+      googleAds: "234-567-8901"
+      hubspotPortal: "11111111"
+    goals:
+      leadsPerMonth: 100
+      callsPerMonth: 50
+
+# node-cron syntax (min hour day month weekday), in org.timezone.
+# Every job uses AGENT_MODEL unless it sets `model:`.
+jobs:
+  - id: meeting-prep
+    skill: meeting-prep
+    cron: "30 6 * * 1-5"
+  - id: daily-performance-sweep
+    skill: daily-performance-sweep
+    cron: "30 7 * * 1-5"
+  - id: inbox-triage
+    skill: inbox-triage
+    cron: "0 8,14 * * 1-5"
+  - id: weekly-client-report
+    skill: weekly-client-report
+    cron: "0 7 * * 1"
+    effort: high
+  - id: funnel-crm-audit
+    skill: funnel-crm-audit
+    cron: "0 7 * * 3"
+  - id: prospect-brief
+    skill: prospect-brief
+    precheck: prospect-check         # cheap gate on a small model; full job only when needed
+    cron: "0 13,18 * * *"
+  - id: pacing-snapshot
+    skill: pacing-snapshot
+    cron: "0 6-20/2 * * *"
+    model: claude-haiku-5-5
+    effort: low
+  - id: memory-tidy
+    skill: memory-tidy
+    cron: "15 2 * * *"
+    effort: low

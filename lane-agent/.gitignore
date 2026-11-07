@@ -1,0 +1,7 @@
+node_modules/
+dist/
+data/
+.env
+# Real org configs hold client names, account IDs and goals. Keep them out of git.
+config/*.yaml
+!config/org.example.yaml
